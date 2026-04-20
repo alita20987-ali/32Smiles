@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* --- New Body Styling --- */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+
+            /* Image visibility fix */
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+                url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2070') no-repeat center center fixed !important;
+
+            background-size: cover !important;
+        }
+
+        .card-content img {
+            width: 50%;
+            height: 180px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .card-text {
+            width: 50%;
+            padding: 15px;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #011121;
+            color: rgb(253, 251, 251);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* NAVBAR */
+        .navbar-custom {
+            background: white;
+        }
+
+        /* Normal state: Neutral Grey Text */
+        .nav-link {
+            font-weight: 500;
+            color: #555 !important;
+            /* This gives you that soft grey look from your image */
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover state: Deep Royal Blue */
+        .nav-link:hover {
+            color: #1A237E !important;
+            /* Your --primary Royal Blue */
+            transform: translateY(-2px);
+            background: none !important;
+            /* Ensures no background appears behind text */
+        }
+
+        /* DOCTOR CARDS */
+        .doctor-section {
+            margin-top: 40px;
+        }
+
+        .doctor-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: 0.3s;
+            height: 220px;
+        }
+
+        .doctor-card:hover {
+            transform: scale(1.03);
+            background: white;
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-text h5 {
+            margin-bottom: 5px;
+        }
+
+        .card-text p {
+            font-size: 13px;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        /* Sidebar Specific Styling */
+        .booking-item {
+            border-left: 4px solid #2196F3;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        /* --------- Dental Clinic Logo --------- */
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .logo-text-box {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-32 {
+            font-size: 22px;
+            font-weight: 900;
+            color: darkblue;
+            letter-spacing: 1px;
+        }
+
+        .logo-smile {
+            font-size: 16px;
+            color: #ffd54f;
+            font-weight: 700;
+        }
+
+        .logo-smile-curve {
+            width: 65px;
+            height: 18px;
+            border-bottom: 4px solid #ffd54f;
+            border-radius: 0 0 60px 60px;
+            margin-top: 3px;
+            position: relative;
+        }
+
+        .mini-tooth {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 2px;
+            bottom: -3px;
+        }
+
+        .mini-tooth:nth-child(1) {
+            left: 20px;
+        }
+
+        .mini-tooth:nth-child(2) {
+            right: 20px;
+        }
+
+        .logo-brand:hover .logo-badge {
+            transform: rotate(12deg) scale(1.1);
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo-badge::after {
+            content: "✨";
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 12px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+
+        /* ---------- MOBILE RESPONSIVE FIX ---------- */
+
+        @media (max-width: 992px) {
+
+            /* Navbar menu spacing */
+            .navbar-nav {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .navbar-nav .nav-item {
+                padding: 6px 0;
+            }
+
+        }
+
+        /* Doctor card layout for tablets */
+        @media (max-width: 768px) {
+
+            .card-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card-content img {
+                width: 100%;
+                height: 200px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .card-text {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .doctor-card {
+                height: auto;
+            }
+
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+
+            .logo-32 {
+                font-size: 18px;
+            }
+
+            .logo-smile {
+                font-size: 13px;
+            }
+
+            .doctor-section {
+                margin-top: 20px;
+            }
+
+            .card-text h5 {
+                font-size: 16px;
+            }
+
+            .card-text p {
+                font-size: 12px;
+            }
+
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Contact Us Button Base Styling */
+        .navbar-custom .nav-link.nav-contact-btn {
+            background-color: #1a237e !important;
+            color: white !important;
+            border-radius: 50px;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            transition: 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* 1. Base State - Use the actual class in your HTML */
+        .navbar-custom .nav-link.nav-contact-btn {
+            background-color: #1a237e !important;
+            color: white !important;
+            border-radius: 50px;
+            padding: 8px 20px !important;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            border: none;
+        }
+
+        /* 2. Hover State - Darker Blue */
+        .navbar-nav .nav-link.nav-contact-btn:hover {
+            background-color: #0d124a !important;
+            /* Navy Blue */
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3. Active (Click) State - Stay Visible! */
+        .navbar-nav .nav-link.nav-contact-btn:active {
+            background-color: #050826 !important;
+            /* Darkest Blue */
+            color: white !important;
+            transform: scale(0.95);
+            /* Slight press effect */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand logo-brand" href="#">
+
+                <div class="logo-badge">
+                    🦷
+                </div>
+
+                <div class="logo-text-box">
+                    <span class="logo-32">32</span>
+                    <span class="logo-smile">Smiles</span>
+                    <div class="logo-smile-curve">
+                        <span class="mini-tooth"></span>
+                        <span class="mini-tooth"></span>
+                    </div>
+                </div>
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Patient_education.html">Patient Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Professional_education.html">Professional
+                            Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Appointment.html">Book Your Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-contact-btn text-white ms-3" href="Contact-Us.html">Contact Us</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <button class="btn btn-warning btn-sm ms-lg-3 mt-1" id="historyBtn"
+                            style="display:none; border-radius: 20px; font-weight: 600;" data-bs-toggle="offcanvas"
+                            data-bs-target="#bookingSidebar">
+                            📋 View My Bookings
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="bookingSidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header bg-primary text-white">
+            <h5 id="sidebarLabel">Appointment History</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="historyContent">
+                <p class="text-muted text-center">No bookings found yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container doctor-section mb-5">
+        <div class="row gx-4 gy-4">
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400" alt="Male Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Asim Ilyas</h5>
+                            <p>Orthodontist – braces & alignment.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Asim Ilyas')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://theurbandentist.pk/wp-content/uploads/DSC_5149.webp" alt="Female Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Sana Fatima</h5>
+                            <p>Cosmetic dentist – smile expert.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Sana Fatima')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://i0.wp.com/dentistnorthhills.com/wp-content/uploads/2023/02/1.png?fit=500%2C500&ssl=1"
+                            alt="Male Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Usama Aamir</h5>
+                            <p>Dental surgeon – surgery expert.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Usama Aamir')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://www.enfieldroyalclinics.com.pk/wp-content/uploads/2023/03/Dr-1.png"
+                            alt="Female Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Rida Khan</h5>
+                            <p>Pediatric dentist – children specialist.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Rida Khan')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://media.istockphoto.com/id/1327024466/photo/portrait-of-male-doctor-in-white-coat-and-stethoscope-standing-in-clinic-hall.jpg?s=612x612&w=0&k=20&c=49wqOwwuonk9f8NACL7M_5RosqQPFwJ8-dpmeo9AvQw="
+                            alt="Male Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Syed Rashid</h5>
+                            <p>Implant specialist – dental implants.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Syed Rashid')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card">
+                    <div class="card-content">
+                        <img src="https://theurbandentist.pk/wp-content/uploads/DSC_5152.webp" alt="Female Doctor">
+                        <div class="card-text">
+                            <h5>Dr. Maham Zulfiqar</h5>
+                            <p>Root canal specialist – endodontic.</p>
+                            <button class="btn btn-primary btn-sm" onclick="openForm('Dr. Maham Zulfiqar')">Book
+                                Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="appointmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Book Your Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm" novalidate>
+                        <input type="text" id="p_name" class="form-control mb-3" placeholder="Enter your name" required>
+                        <div id="nameError" class="error-msg">Invalid name (Minimum 3 characters)</div>
+
+                        <input type="tel" id="p_contact" class="form-control mb-3" placeholder="03xx-xxxxxxx" required>
+                        <div id="contactError" class="error-msg">Invalid contact (Must start with 03 and be 11 digits)
+                        </div>
+
+                        <input type="email" id="p_email" class="form-control mb-3" placeholder="abc@gmail.com" required>
+                        <div id="emailError" class="error-msg">Invalid email format</div>
+
+                        <select class="form-control mb-3" id="doctorSelect" required>
+                            <option value="">Select your Doctor</option>
+                            <option value="Dr. Asim Ilyas">Dr. Asim Ilyas</option>
+                            <option value="Dr. Sana Fatima">Dr. Sana Fatima</option>
+                            <option value="Dr. Usama Aamir">Dr. Usama Aamir</option>
+                            <option value="Dr. Rida Khan">Dr. Rida Khan</option>
+                            <option value="Dr. Syed Rashid">Dr. Syed Rashid</option>
+                            <option value="Dr. Maham Zulfiqar">Dr. Maham Zulfiqar</option>
+                        </select>
+
+                        <div id="doctorInfo" class="mt-3"></div>
+
+                        <div class="form-check mb-3">
+                            <input type="checkbox" id="p_agree" class="form-check-input" required>
+                            <label class="form-check-label">I agree to all terms and conditions</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Confirm Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0">© 2026 32smiles.com | Professional Education Portal</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let appointments = [];
+        let doctorData = {
+            "Dr. Asim Ilyas": { fee: 3000, days: ["Monday", "Wednesday", "Friday"], time: "19-21" },
+            "Dr. Sana Fatima": { fee: 3500, days: ["Tuesday", "Thursday"], time: "18-20" },
+            "Dr. Usama Aamir": { fee: 4000, days: ["Monday", "Saturday"], time: "17-19" },
+            "Dr. Rida Khan": { fee: 2500, days: ["Wednesday", "Friday"], time: "16-18" },
+            "Dr. Syed Rashid": { fee: 4500, days: ["Tuesday", "Thursday"], time: "19-21" },
+            "Dr. Maham Zulfiqar": { fee: 3800, days: ["Monday", "Friday"], time: "18-20" }
+        };
+
+        function openForm(doctor) {
+            let myModal = new bootstrap.Modal(document.getElementById("appointmentModal"));
+            document.getElementById("doctorSelect").value = doctor;
+            document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+            showDoctorInfo();
+            myModal.show();
+        }
+
+        document.getElementById("doctorSelect").addEventListener("change", showDoctorInfo);
+
+        function showDoctorInfo() {
+            let doctor = document.getElementById("doctorSelect").value;
+            if (!doctor) return;
+            let data = doctorData[doctor];
+
+            let html = `
+                <p><b>Fee:</b> ${data.fee} PKR</p>
+                <label>Select Day</label>
+                <select id="selectedDay" class="form-control mb-2">
+                    ${data.days.map(d => `<option>${d}</option>`).join("")}
+                </select>
+                <label>Select Time</label>
+                <select id="selectedTime" class="form-control">
+                    ${generateTimeSlots(data.time)}
+                </select>
+            `;
+            document.getElementById("doctorInfo").innerHTML = html;
+        }
+
+        function generateTimeSlots(timeRange) {
+            let [start, end] = timeRange.split("-");
+            let slots = "";
+            for (let h = parseInt(start); h <= parseInt(end); h++) {
+                let hour = h % 12 === 0 ? 12 : h % 12;
+                let period = h >= 12 ? "PM" : "AM";
+                slots += `<option>${hour}:00 ${period}</option>`;
+            }
+            return slots;
+        }
+
+        function updateSidebarUI() {
+            let content = document.getElementById("historyContent");
+            if (appointments.length === 0) return;
+
+            let html = "";
+            appointments.forEach((a, i) => {
+                html += `
+                <div class="booking-item p-3 mb-3 shadow-sm border-start">
+                    <h6 class="text-primary mb-1">${a.doctor}</h6>
+                    <p class="mb-0 small"><b>Patient:</b> ${a.name}</p>
+                    <small class="text-muted d-block"><b>Day:</b> ${a.day}</small>
+                    <small class="text-muted d-block"><b>Time:</b> ${a.time}</small>
+                    <small class="text-muted d-block"><b>Booked on:</b> ${a.date}</small>
+                </div>`;
+            });
+            content.innerHTML = html;
+        }
+
+        document.getElementById("appointmentForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let name = document.getElementById("p_name").value.trim();
+            let contact = document.getElementById("p_contact").value.trim();
+            let email = document.getElementById("p_email").value.trim();
+            let doctor = document.getElementById("doctorSelect").value;
+
+            // Get selected day and time
+            let day = document.getElementById("selectedDay") ? document.getElementById("selectedDay").value : "";
+            let time = document.getElementById("selectedTime") ? document.getElementById("selectedTime").value : "";
+            let date = new Date().toLocaleDateString();
+
+            let isValid = true;
+            if (name.length < 3) { document.getElementById("nameError").style.display = "block"; isValid = false; }
+            else { document.getElementById("nameError").style.display = "none"; }
+
+            let contactPattern = /^03\d{9}$/;
+            if (!contactPattern.test(contact)) { document.getElementById("contactError").style.display = "block"; isValid = false; }
+            else { document.getElementById("contactError").style.display = "none"; }
+
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) { document.getElementById("emailError").style.display = "block"; isValid = false; }
+            else { document.getElementById("emailError").style.display = "none"; }
+
+            if (isValid) {
+                // Save time as well
+                appointments.push({ name, doctor, day, time, date });
+                alert("Your appointment has been done successfully!");
+
+                document.getElementById("historyBtn").style.display = "block";
+                updateSidebarUI();
+
+                bootstrap.Modal.getInstance(document.getElementById('appointmentModal')).hide();
+                this.reset();
+                document.getElementById("doctorInfo").innerHTML = "";
+            }
+        });
+    </script>
+</body>
+
+</html>

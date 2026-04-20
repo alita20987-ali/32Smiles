@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32Smiles - Your Dental Health Partner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            /* Theme: Deep Luxury */
+            --primary: #1A237E;
+            /* Royal Blue */
+            --primary-dark: #0D1345;
+            /* Navy */
+            --mint: #F0F4F8;
+            /* Cool White */
+            --teal: #0F172A;
+            /* Midnight Blue */
+            --light: #FFFFFF;
+            /* Pure White */
+            --dark-text: #1E293B;
+            /* Slate Text */
+            --accent: #C5A059;
+            /* Gold */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark-text);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #ffffff, var(--mint)) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            height: auto;
+        }
+
+
+        .nav-link {
+            font-weight: 500;
+            color: #444 !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Carousel Styling */
+        #heroCarousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #heroCarousel .carousel-item {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+        }
+
+        #heroCarousel .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            transform: scale(1);
+            transition: transform 8s ease-in-out;
+        }
+
+        /* Zoom Animation */
+        #heroCarousel .carousel-item.active img {
+            transform: scale(1.15);
+        }
+
+        /* Gradient Overlay */
+        #heroCarousel .carousel-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+            z-index: 1;
+        }
+
+        /* Caption Styling */
+        .carousel-caption {
+            z-index: 2;
+            bottom: 30%;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        /* Glass Effect */
+        .carousel-caption h2,
+        .carousel-caption p {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            animation: fadeSlideUp 1.5s ease forwards;
+            opacity: 0;
+        }
+
+        /* Delay animation */
+        .carousel-item.active .carousel-caption h2 {
+            animation-delay: 0.5s;
+            opacity: 1;
+        }
+
+        .carousel-item.active .carousel-caption p {
+            animation-delay: 1s;
+            opacity: 1;
+        }
+
+        /* Custom Animation */
+        @keyframes fadeSlideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Floating Button */
+        .hero-btn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            transition: 0.4s ease;
+            animation: floatBtn 3s infinite ease-in-out;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes floatBtn {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Controls Styling */
+        .hero,
+        .carousel-control-next-icon {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.35s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        footer {
+            background-color: var(--teal);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .faq .accordion-button {
+            font-weight: 500;
+        }
+
+        /* Cart button style */
+        .cart-btn {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-btn i {
+            font-size: 1.4rem;
+        }
+
+        /* Modal enhancements */
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            font-weight: 600;
+        }
+
+        .empty-cart-icon {
+            font-size: 6rem;
+            color: #dee2e6;
+        }
+
+        .quantity-input {
+            width: 70px;
+        }
+
+        /* Footer Social Icons */
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--dark-text);
+            transform: translateY(-2px);
+        }
+
+        .navbar .btn-primary {
+            color: white !important;
+        }
+
+        /* Footer Styling Fix */
+        .footer {
+            background-color: var(--teal);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer h5,
+        .footer h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .address-text {
+            line-height: 1.7;
+        }
+
+        .footer hr {
+            border-color: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* --------- Dental Clinic Logo --------- */
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .logo-text-box {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-32 {
+            font-size: 22px;
+            font-weight: 900;
+            color: darkblue;
+            letter-spacing: 1px;
+        }
+
+        .logo-smile {
+            font-size: 16px;
+            color: #ffd54f;
+            font-weight: 700;
+        }
+
+        .logo-smile-curve {
+            width: 65px;
+            height: 18px;
+            border-bottom: 4px solid #ffd54f;
+            border-radius: 0 0 60px 60px;
+            margin-top: 3px;
+            position: relative;
+        }
+
+        .mini-tooth {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 2px;
+            bottom: -3px;
+        }
+
+        .mini-tooth:nth-child(1) {
+            left: 20px;
+        }
+
+        .mini-tooth:nth-child(2) {
+            right: 20px;
+        }
+
+        .logo-brand:hover .logo-badge {
+            transform: rotate(12deg) scale(1.1);
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo-badge::after {
+            content: "✨";
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 12px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand logo-brand" href="#">
+
+                <div class="logo-badge">
+                    🦷
+                </div>
+
+                <div class="logo-text-box">
+                    <span class="logo-32">32</span>
+                    <span class="logo-smile">Smile</span>
+                    <div class="logo-smile-curve">
+                        <span class="mini-tooth"></span>
+                        <span class="mini-tooth"></span>
+                    </div>
+                </div>
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Patient_education.html">Patient Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Professional_education.html">Professional
+                            Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Appointment.html">Book Your Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-3" href="Contact.html">Contact Us</a>
+                    </li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118" alt="Modern Dental Clinic">
+                <div class="carousel-caption">
+                    <h2 class="display-4 fw-bold text-white">Brighten Your Smile</h2>
+                    <p class="lead text-white">Advanced whitening & complete oral care</p>
+                    <button class="hero-btn" type="button" onclick="window.location.href='contact.html'">Book
+                        Appointment</button>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1758205307783-f31fe8499814?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fEV4cGVydCUyMERlbnRhbCUyMFRlYW18ZW58MHx8MHx8fDA%3D"
+                    alt="Happy Dental Patient">
+                <div class="carousel-caption">
+                    <h2 class="display-4 fw-bold text-white">Expert Dental Team</h2>
+                    <p class="lead text-white">Comfort. Precision. Care.</p>
+                    <button class="hero-btn" type="button"
+                        onclick="window.location.href='professional_education.html'">Meet Our Doctors</button>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09" alt="Confident Smile">
+                <div class="carousel-caption">
+                    <h2 class="display-4 fw-bold text-white">Your Smile Matters</h2>
+                    <p class="lead text-white">Healthy teeth for a lifetime</p>
+                    <button class="hero-btn" type="button"
+                        onclick="document.querySelector('#products').scrollIntoView({behavior: 'smooth'})">Explore
+                        Services</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Patient Education Section -->
+    <section id="patient" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Patient Education</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://www.premierdentistryofeagle.com/wp-content/uploads/brush-your-teeth-the-right-way-tips-for-a-clean-and-healthy-smile-scaled.jpeg"
+                            height="70%" class="card-img-top" alt="Brushing">
+                        <div class="card-body">
+                            <h5>Brushing Right</h5>
+                            <p>2 minutes, twice daily, gentle circular motions — protect enamel & gums effectively.</p>
+                            <a href="patient_education.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://jnj-content-lab2.brightspotcdn.com/dims4/default/0e4830f/2147483647/strip/false/crop/1640x1192+0+0/resize/1486x1080!/quality/90/?url=https%3A%2F%2Fjnj-production-jnj.s3.us-east-1.amazonaws.com%2Fbrightspot%2Ff2%2Fa6%2F8b9ba8289c9f8ebcc21c229dfa45%2Flede-brushing-teeth-istock-500925043-1640.jpg"
+                            height="70%" class="card-img-top" alt="Flossing">
+                        <div class="card-body">
+                            <h5>Flossing Daily</h5>
+                            <p>Removes plaque between teeth — reduces risk of cavities & gum disease by up to 40%.</p>
+                            <a href="patient_education.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://plus.unsplash.com/premium_photo-1681966962522-546f370bc98e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGVudGlzdHxlbnwwfHwwfHx8MA%3D%3D"
+                            height="70%" class="card-img-top" alt="Checkup">
+                        <div class="card-body">
+                            <h5>Regular Check-ups</h5>
+                            <p>Every 6 months — early detection saves time, money & your natural teeth. Book your slot
+                                now.</p>
+                            <a href="patient_education.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Education Section -->
+    <section id="professional" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Professional Education</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1684607631747-045ecfeeb4c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29zbWV0aWMlMjBkZW50aXN0cnl8ZW58MHx8MHx8fDA%3D"
+                            height="70%" class="card-img-top" alt="Courses">
+                        <div class="card-body">
+                            <h5>Advanced Courses</h5>
+                            <p>Orthodontics, implants, cosmetic dentistry — CE credits available.</p>
+                            <a href="professional_education.html" class="btn btn-primary">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://www.leica-microsystems.com/fileadmin/_processed_/1/9/csm_Dr_Raicov_microscope_b00445217f.jpg"
+                            height="70%" class="card-img-top" alt="Resources">
+                        <div class="card-body">
+                            <h5>Faculty Resources</h5>
+                            <p>Lesson plans, case studies, teaching slides for dental educators.</p>
+                            <a href="professional_education.html" class="btn btn-primary">Access</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b" class="card-img-top"
+                            height="70%" alt="Case Studies">
+                        <div class="card-body">
+                            <h5>Real Case Studies</h5>
+                            <p>Complex treatments documented with before/after results.</p>
+                            <a href="professional_education.html" class="btn btn-primary">View Cases</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Latest Research</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80"
+                            height="70%" class="card-img-top" alt="Microscope">
+                        <div class="card-body">
+                            <h5>Stem Cell Regeneration</h5>
+                            <p>New studies show promise in regrowing tooth structures naturally.</p>
+                            <a href="research.html" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://thumbs.dreamstime.com/b/dentist-examining-patient-teeth-intraoral-d-scanner-modern-dental-clinic-prosthodontics-stomatology-concept-close-up-239202141.jpg"
+                            height="70%" class="card-img-top" alt="AI Diagnostics">
+                        <div class="card-body">
+                            <h5>AI in Diagnostics</h5>
+                            <p>AI tools detect cavities earlier than traditional X-rays in trials.</p>
+                            <a href="research.html" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://www.visioneng.com/wp-content/uploads/2025/07/OPTA_Dental_1-800-480.jpg.webp"
+                            height="70%" class="card-img-top" alt="New Materials">
+                        <div class="card-body">
+                            <h5>Bioactive Fillings</h5>
+                            <p>Materials that release minerals to strengthen teeth over time.</p>
+                            <a href="research.html" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Recommended Products</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL-9KmwX66FLlv1OFcrOTZRRLyjeN3HYAV3Q&s"
+                            height="70%" class="card-img-top" alt="Toothbrush & Paste">
+                        <div class="card-body">
+                            <h5>Electric Toothbrushes</h5>
+                            <p>Timer, pressure sensor — better plaque removal than manual.</p>
+                            <a href="product.html" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWG5FLVsTwDtGW-x4t_2E6SMh-EKLy4tGGsg&s"
+                            height="70%" class="card-img-top" alt="Dental Instruments">
+                        <div class="card-body">
+                            <h5>Fluoride Toothpastes</h5>
+                            <p>Strengthens enamel, prevents cavities — dentist recommended.</p>
+                            <a href="product.html" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="https://media.istockphoto.com/id/174754803/photo/girl-brushing-her-teeth.webp?a=1&b=1&s=612x612&w=0&k=20&c=daukl7d-Fnt7uvL3cD72pUqgPFiSwUE1EnGlV9GZ_mc="
+                            height="70%" class="card-img-top" alt="Kids Products">
+                        <div class="card-body">
+                            <h5>Kids Oral Care</h5>
+                            <p>Fun flavors, soft brushes — makes brushing enjoyable for children.</p>
+                            <a href="product.html" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">How to Brush Properly</h2>
+            <p class="text-center lead mb-4">Follow this step-by-step guide from dental experts to master the correct
+                brushing technique — gentle, effective, and gum-friendly (Modified Bass or circular method recommended).
+            </p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="ratio ratio-16x9 rounded shadow">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/1q10LWifXkw?si=c6Ug_Pg5DmMBui6z"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h5 class="text-center mb-4">Quick Visual Guide to Proper Technique</h5>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <img src="https://assets.clevelandclinic.org/transform/LargeFeatureImage/04f7eec3-c081-4cc3-a538-c9d386f337dc/brush-teeth-598551510-770x533-1_jpg"
+                            class="img-fluid rounded shadow" alt="Person demonstrating proper tooth brushing">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://images.squarespace-cdn.com/content/v1/56801fced82d5e87366f5448/1619797434866-07YMNU8CROQW9TZLBGNA/Brush_Teeth_Steps.jpg"
+                            class="img-fluid rounded shadow" alt="Step-by-step how to brush teeth illustration">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://i.ytimg.com/vi/leVF5RYj42Y/maxresdefault.jpg" class="img-fluid rounded shadow"
+                            alt="Close-up of correct toothbrush angle">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="text-muted">Brush gently at a 45° angle to the gums for 2 minutes, twice daily. Don't forget
+                    to floss!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">What People Say</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <p class="fst-italic">"Best dental tips website! My gums improved in weeks."</p>
+                        <p class="fw-bold">Ayesha K. — Karachi</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <p class="fst-italic">"Love the research updates — very helpful for my practice."</p>
+                        <p class="fw-bold">Dr. Ahmed R. — Lahore</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <p class="fst-italic">"Simple, clear advice. My kids now brush happily!"</p>
+                        <p class="fw-bold">Sara M. — Islamabad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Empty Cart State -->
+                    <div class="text-center py-5">
+                        <i class="bi bi-cart-x empty-cart-icon"></i>
+                        <h4 class="mt-4 mb-3">Your cart is empty</h4>
+                        <p class="text-muted mb-4">Add some dental care essentials to get started!</p>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal"
+                            onclick="document.querySelector('#products').scrollIntoView({behavior: 'smooth'})">
+                            Explore Products
+                        </button>
+                    </div>
+
+                </div>
+                <div class="text-end mt-4">
+                    <h5>Total: <span class="fw-bold">$0.00</span></h5>
+                    <button class="btn btn-primary mt-2" type="button"
+                        onclick="window.location.href='product.html'">Proceed to Checkout</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <!-- Column 1 -->
+                <div class="col-md-3">
+                    <h5>32Smiles.com</h5>
+                    <p>Healthy Smiles Start Here</p>
+
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="col-md-3">
+                    <h6>Site Map</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Patient Education</a></li>
+                        <li><a href="#">Professional Education</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="col-md-3">
+                    <h6>Contact</h6>
+                    <p><a href="#">info@32smiles.com</a></p>
+                    <p>+92-300-1234567</p>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="col-md-3">
+                    <h6>Address</h6>
+                    <p class="address-text">
+                        32 Smiles Dental Hub<br>
+                        Plot 45-C, Street 9,<br>
+                        Saba Commercial Area,<br>
+                        Phase V, DHA,<br>
+                        Karachi, Pakistan
+                    </p>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <p class="text-center copyright">
+                © 2026 32Smiles.com | Student Project
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional small script to smooth scroll to products when clicking Explore -->
+    <script>
+        document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Optional: smooth scroll to products section after modal closes
+                setTimeout(() => {
+                    document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | 32Smiles.com | Latest in Dental Science</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            /* Theme: Deep Luxury */
+            --primary: #1A237E;
+            /* Royal Blue */
+            --primary-dark: #0D1345;
+            /* Navy */
+            --mint: #F0F4F8;
+            /* Cool White */
+            --teal: #0F172A;
+            /* Midnight Blue */
+            --light: #FFFFFF;
+            /* Pure White */
+            --dark-text: #1E293B;
+            /* Slate Text */
+            --accent: #C5A059;
+            /* Gold */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background: linear-gradient(135deg, #ffffff, var(--mint)) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+        }
+
+
+        .nav-link {
+            font-weight: 500;
+            color: #444 !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5') center/cover no-repeat;
+            color: white;
+            padding: 12rem 0 8rem;
+            text-align: center;
+            height: 60vh;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Sections & Typography --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* --- Cards --- */
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(45, 127, 249, 0.28);
+        }
+
+        /* --- Utilities --- */
+        .cart-btn {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* Footer Social Icons */
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--dark-text);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--teal);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        footer a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+            padding-left: 5px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--mint);
+            color: var(--dark-text);
+        }
+
+        /* Cart Modal Styling */
+        #cartModal .modal-header {
+            background: var(--primary);
+            color: white;
+        }
+
+        #cartModal .modal-content {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .empty-cart-icon {
+            font-size: 4rem;
+            color: #dee2e6;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info h6 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* ARTICLE STYLE SECTIONS */
+        .research-article {
+            padding: 5rem 0;
+        }
+
+        .research-article:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .research-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .research-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-article h2 {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-article .lead {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .navbar .btn-primary {
+            color: white !important;
+        }
+
+        /* Footer Styling Fix */
+        .footer {
+            background-color: var(--teal);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer h5,
+        .footer h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .address-text {
+            line-height: 1.7;
+        }
+
+        .footer hr {
+            border-color: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* --------- Dental Clinic Logo --------- */
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .logo-text-box {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-32 {
+            font-size: 22px;
+            font-weight: 900;
+            color: darkblue;
+            letter-spacing: 1px;
+        }
+
+        .logo-smile {
+            font-size: 16px;
+            color: #ffd54f;
+            font-weight: 700;
+        }
+
+        .logo-smile-curve {
+            width: 65px;
+            height: 18px;
+            border-bottom: 4px solid #ffd54f;
+            border-radius: 0 0 60px 60px;
+            margin-top: 3px;
+            position: relative;
+        }
+
+        .mini-tooth {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 2px;
+            bottom: -3px;
+        }
+
+        .mini-tooth:nth-child(1) {
+            left: 20px;
+        }
+
+        .mini-tooth:nth-child(2) {
+            right: 20px;
+        }
+
+        .logo-brand:hover .logo-badge {
+            transform: rotate(12deg) scale(1.1);
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo-badge::after {
+            content: "✨";
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 12px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand logo-brand" href="#">
+
+                <div class="logo-badge">
+                    🦷
+                </div>
+
+                <div class="logo-text-box">
+                    <span class="logo-32">32</span>
+                    <span class="logo-smile">Smiles</span>
+                    <div class="logo-smile-curve">
+                        <span class="mini-tooth"></span>
+                        <span class="mini-tooth"></span>
+                    </div>
+                </div>
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Patient_education.html">Patient Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Professional_education.html">Professional
+                            Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Appointment.html">Book Your Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-3" href="contact.html">Contact Us</a>
+                    </li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="container">
+            <h1>Latest Dental Research</h1>
+            <p class="lead fs-4">Discover groundbreaking discoveries shaping the future of oral health — from regrowing
+                teeth to smarter diagnostics.</p>
+        </div>
+    </section>
+
+    <!-- ARTICLE 1 -->
+    <section class="research-article">
+        <div class="container">
+            <div class="research-content">
+                <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=800&q=80"
+                    alt="Stem cell research in lab" class="research-img">
+
+                <h2>Stem Cells: The Path to Regrowing Natural Teeth</h2>
+                <p class="lead">For decades, losing a tooth meant implants or bridges. But what if your body could
+                    simply grow a new one?</p>
+
+                <p>Recent breakthroughs in regenerative dentistry are turning this dream into reality. In 2024–2025,
+                    researchers in Japan and the US advanced stem cell therapies that activate dormant tooth-forming
+                    cells. By blocking proteins like USAG-1, experimental drugs stimulate third-generation tooth growth
+                    — human trials started in 2024 and show early promise for children and adults missing multiple
+                    teeth.</p>
+
+                <p>Teams at Kyoto University and Tufts University have grown functional tooth-like structures using
+                    dental pulp stem cells combined with scaffolds and growth factors. Imagine a future where
+                    extractions are followed by natural regrowth — no metal implants, no lifelong replacements. While
+                    full availability may come by 2030, this could revolutionize care for congenital tooth loss, trauma,
+                    and age-related decay.</p>
+
+                <a href="#" class="btn btn-primary btn-lg">Explore Full Research</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLE 2 -->
+    <section class="research-article">
+        <div class="container">
+            <div class="research-content">
+                <img src="https://finedent.in/wp-content/uploads/2025/08/artificial-intelligence-in-dentistry.png"
+                    alt="AI analyzing dental x-ray" class="research-img">
+
+                <h2>AI Revolution: Detecting Cavities Earlier Than Ever</h2>
+                <p class="lead">Human eyes miss early decay — AI doesn't. 2025 studies show machines spotting problems
+                    years before they become visible.</p>
+
+                <p>Advanced AI models using convolutional neural networks (CNNs) now analyze X-rays, intraoral photos,
+                    and even smartphone images with 91–94% accuracy — often outperforming experienced dentists,
+                    especially on hidden interproximal caries. A 2025 meta-analysis confirmed AI detects early lesions
+                    up to 5 years sooner, allowing preventive treatments instead of fillings.</p>
+
+                <p>This technology is already in clinics: tools flag decay in seconds, reduce false negatives, and
+                    support teledentistry in remote areas like parts of Pakistan. The result? Fewer emergencies, lower
+                    costs, and healthier smiles through early intervention. The future of diagnostics is not just human
+                    — it's human + AI.</p>
+
+                <a href="#" class="btn btn-primary btn-lg">Learn More About AI Tools</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLE 3 -->
+    <section class="research-article">
+        <div class="container">
+            <div class="research-content">
+                <img src="https://s43932.pcdn.co/wp-content/uploads/sites/178/2024/11/shutterstock_2160215565-min-768x512.jpg.optimal.jpg"
+                    alt="Bioactive material under microscope" class="research-img">
+
+                <h2>Bioactive Materials: Fillings That Heal Teeth</h2>
+                <p class="lead">Traditional fillings just seal — new bioactive ones release minerals to rebuild enamel
+                    and dentin from within.</p>
+
+                <p>2025 research highlights materials like bioactive glass (e.g., 45S5 Bioglass), S-PRG fillers, and
+                    calcium phosphate hybrids. These release calcium, phosphate, fluoride, and strontium ions, creating
+                    hydroxyapatite — the natural building block of teeth. Studies show they remineralize early lesions,
+                    buffer acids, reduce bacterial growth, and strengthen surrounding enamel.</p>
+
+                <p>In lab and clinical tests, materials like ACTIVA BioACTIVE and Fuji Triage restored microhardness
+                    close to natural enamel after months. This means longer-lasting restorations, fewer secondary
+                    cavities, and a shift toward minimally invasive dentistry. For patients, it’s healing instead of
+                    just patching.</p>
+
+                <a href="#" class="btn btn-primary btn-lg">Read the Latest Studies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 text-white" style="background: var(--primary);">
+        <div class="container text-center">
+            <h2>Get Monthly Dental Research Updates & Tips</h2>
+            <form id="newsletterForm" class="row g-3 justify-content-center mt-4">
+                <div class="col-md-5">
+                    <input type="email" id="email" class="form-control form-control-lg" placeholder="your@email.com"
+                        required>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-light btn-lg w-100">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <!-- Column 1 -->
+                <div class="col-md-3">
+                    <h5>32Smiles.com</h5>
+                    <p>Healthy Smiles Start Here</p>
+
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="col-md-3">
+                    <h6>Site Map</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Patient Education</a></li>
+                        <li><a href="#">Professional Education</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="col-md-3">
+                    <h6>Contact</h6>
+                    <p><a href="#">info@32smiles.com</a></p>
+                    <p>+92-300-1234567</p>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="col-md-3">
+                    <h6>Address</h6>
+                    <p class="address-text">
+                        32 Smiles Dental Hub<br>
+                        Plot 45-C, Street 9,<br>
+                        Saba Commercial Area,<br>
+                        Phase V, DHA,<br>
+                        Karachi, Pakistan
+                    </p>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <p class="text-center copyright">
+                © 2026 32Smiles.com | Student Project
+            </p>
+        </div>
+    </footer>
+
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="cartModalLabel fw-bold"><i class="bi bi-bag-heart me-2"></i>Your
+                        Shopping Cart</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="cart-items-container">
+                        <div class="text-center py-5">
+                            <i class="bi bi-cart-x empty-cart-icon d-block mb-3"></i>
+                            <p class="text-muted">Your cart is currently empty.</p>
+                            <a href="product.html" class="btn btn-outline-primary btn-sm rounded-pill">Browse
+                                Products</a>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                        <span>Total:</span>
+                        <span class="text-primary" id="cart-total-amount">$0.00</span>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary rounded-pill px-4">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        (function () {
+            document.querySelectorAll('a[href="#"]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            document.querySelectorAll('button, a.btn').forEach(function (el) {
+                el.addEventListener('click', function () {
+
+                    if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href') !== '#') return;
+                    if (el.getAttribute('data-bs-toggle')) return;
+
+
+                    if (el.tagName === 'BUTTON' && (el.textContent || '').trim().toLowerCase() === 'checkout') {
+                        window.location.href = 'product.html';
+                        return;
+                    }
+                }, { passive: true });
+            });
+        })();
+    </script>
+</body>
+
+</html>

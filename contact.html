@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - 32Smiles</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            /* Theme: Deep Luxury */
+            --primary: #1A237E;
+            /* Royal Blue */
+            --primary-dark: #0D1345;
+            /* Navy */
+            --mint: #F0F4F8;
+            /* Cool White */
+            --teal: #0F172A;
+            /* Midnight Blue */
+            --light: #FFFFFF;
+            /* Pure White */
+            --dark-text: #1E293B;
+            /* Slate Text */
+            --accent: #C5A059;
+            /* Gold */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark-text);
+            padding-top: 110px;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #ffffff, var(--mint)) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+
+            height: auto;
+        }
+
+
+
+        .nav-link {
+            font-weight: 500;
+            color: #444 !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(45, 127, 249, 0.25);
+        }
+
+        /* Cart button */
+        .cart-btn {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-btn i {
+            font-size: 1.4rem;
+        }
+
+        /* HERO */
+        .contact-hero {
+            position: relative;
+            padding: 2.2rem 0 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, #ffffff, rgba(217, 246, 255, 0.65));
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 2rem 1.6rem;
+            box-shadow: 0 12px 32px rgba(16, 42, 67, 0.06);
+        }
+
+        .hero-card h1 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-card p {
+            color: rgba(16, 42, 67, 0.75);
+            margin-bottom: 0;
+        }
+
+        /* INFO CARDS */
+        .info-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.1rem 1rem;
+            box-shadow: 0 10px 26px rgba(16, 42, 67, 0.05);
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(45, 127, 249, 0.10);
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex: 0 0 auto;
+        }
+
+        .muted {
+            color: rgba(16, 42, 67, 0.7);
+        }
+
+        /* FORM CARD */
+        .form-container {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 1.6rem;
+            box-shadow: 0 14px 34px rgba(16, 42, 67, 0.08);
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 12px;
+            border: 1px solid #dfe8f3;
+            padding: 0.75rem 0.9rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: rgba(45, 127, 249, 0.55);
+            box-shadow: 0 0 0 0.2rem rgba(45, 127, 249, 0.15);
+        }
+
+        textarea.form-control {
+            resize: none;
+            min-height: 110px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+            filter: brightness(0.98);
+            box-shadow: 0 10px 18px rgba(45, 127, 249, 0.20);
+            transform: translateY(-1px);
+        }
+
+        .success-box {
+            display: none;
+        }
+
+        .error {
+            color: #d60000;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        /* BUBBLES BACKGROUND */
+        .bubbles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubbles-bg span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(217, 246, 255, 0.75);
+            border-radius: 50%;
+            bottom: -50px;
+            animation: bubbleUp 15s linear infinite;
+        }
+
+        @keyframes bubbleUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--teal);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            opacity: 0.85;
+            transition: 0.25s;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            margin-right: 10px;
+            transition: 0.25s;
+        }
+
+        .social-links a:hover {
+            background: rgba(0, 229, 168, 0.18);
+            border-color: rgba(0, 229, 168, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* Small tweaks */
+        .section-title {
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .divider-soft {
+            border-color: rgba(16, 42, 67, 0.10);
+        }
+
+        .navbar .btn-primary {
+            color: white !important;
+        }
+
+        /* Footer Styling Fix */
+        .footer {
+            background-color: var(--teal);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer h5,
+        .footer h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .address-text {
+            line-height: 1.7;
+        }
+
+        .footer hr {
+            border-color: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--teal);
+            color: #fff;
+            padding: 60px 0 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer h5,
+        .footer h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .address-text {
+            line-height: 1.7;
+        }
+
+        .footer hr {
+            border-color: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            margin-right: 10px;
+            transition: 0.25s;
+            color: white;
+        }
+
+        .social-links a:hover {
+            background: rgba(0, 229, 168, 0.18);
+            border-color: rgba(0, 229, 168, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* --------- Dental Clinic Logo --------- */
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .logo-text-box {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-32 {
+            font-size: 22px;
+            font-weight: 900;
+            color: darkblue;
+            letter-spacing: 1px;
+        }
+
+        .logo-smile {
+            font-size: 16px;
+            color: #ffd54f;
+            font-weight: 700;
+        }
+
+        .logo-smile-curve {
+            width: 65px;
+            height: 18px;
+            border-bottom: 4px solid #ffd54f;
+            border-radius: 0 0 60px 60px;
+            margin-top: 3px;
+            position: relative;
+        }
+
+        .mini-tooth {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 2px;
+            bottom: -3px;
+        }
+
+        .mini-tooth:nth-child(1) {
+            left: 20px;
+        }
+
+        .mini-tooth:nth-child(2) {
+            right: 20px;
+        }
+
+        .logo-brand:hover .logo-badge {
+            transform: rotate(12deg) scale(1.1);
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ffffff, #b3e5fc);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo-badge::after {
+            content: "✨";
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 12px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand logo-brand" href="#">
+
+                <div class="logo-badge">
+                    🦷
+                </div>
+
+                <div class="logo-text-box">
+                    <span class="logo-32">32</span>
+                    <span class="logo-smile">Smiles</span>
+                    <div class="logo-smile-curve">
+                        <span class="mini-tooth"></span>
+                        <span class="mini-tooth"></span>
+                    </div>
+                </div>
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Patient_education.html">Patient Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Professional_education.html">Professional
+                            Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Appointment.html">Book Your Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-3" href="Contact.html">Contact Us</a>
+                    </li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACKGROUND BUBBLES -->
+    <div class="bubbles-bg" aria-hidden="true">
+        <span style="left:10%"></span>
+        <span style="left:25%"></span>
+        <span style="left:40%"></span>
+        <span style="left:55%"></span>
+        <span style="left:70%"></span>
+        <span style="left:85%"></span>
+    </div>
+
+    <!-- HEADER -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="hero-card">
+                <h1>Contact Us</h1>
+                <p>We would love to hear from you!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <main class="pb-4">
+        <div class="container">
+            <div class="row g-4 align-items-start">
+                <!-- LEFT: INFO -->
+                <div class="col-lg-5">
+                    <h4 class="section-title mb-3">Get in touch</h4>
+
+                    <div class="info-card mb-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="info-icon"><i class="bi bi-telephone"></i></div>
+                            <div>
+                                <div class="fw-semibold">Phone</div>
+                                <div class="muted"><a href="https://www.google.com"
+                                        class="text-decoration-underline">+92-300-1234567</a></div>
+                                <div class="small muted">Mon–Sat • 10:00 AM – 8:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card mb-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="info-icon"><i class="bi bi-envelope"></i></div>
+                            <div>
+                                <div class="fw-semibold">Email</div>
+                                <div class="muted"><a href="mailto:info@32smiles.com"
+                                        class="text-decoration-underline">info@32smiles.com</a></div>
+                                <div class="small muted">We usually respond within 24 hours.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card mb-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+                            <div>
+                                <div class="fw-semibold">Address</div>
+                                <div class="muted">
+                                    <a href="https://www.google.com/maps/search/?api=1&query=32+Smiles+Dental+Hub%2C+Plot+45-C%2C+Street+9%2C+Saba+Commercial+Area%2C+Phase+V%2C+DHA%2C+Karachi%2C+Pakistan"
+                                        target="_blank" rel="noopener noreferrer" class="text-decoration-underline">
+                                        32 Smiles Dental Hub, Plot 45-C, Street 9, Saba Commercial Area, Phase V, DHA,
+                                        Karachi, Pakistan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="info-icon"><i class="bi bi-info-circle"></i></div>
+                            <div>
+                                <div class="fw-semibold">What happens next?</div>
+                                <div class="small muted mt-1">
+                                    After you submit the form:
+                                    <ul class="mb-0 mt-2">
+                                        <li>We review your message</li>
+                                        <li>A representative contacts you</li>
+                                        <li>We guide you to the right service</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 divider-soft">
+
+                    <div class="accordion" id="contactFaq">
+                        <div class="accordion-item border-0 mb-2">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed rounded-3" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Do you offer appointments on weekends?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+                                <div class="accordion-body muted">
+                                    Yes, Saturday appointments are available. Please message us to confirm timings.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0 mb-2">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed rounded-3" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Can I ask about products and pricing?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+                                <div class="accordion-body muted">
+                                    Absolutely. Choose “General Inquiry” as the subject and mention the product name in
+                                    your message.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed rounded-3" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How fast will I get a response?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+                                <div class="accordion-body muted">
+                                    We typically respond within 24 hours (sooner during working hours).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: FORM -->
+                <div class="col-lg-7">
+                    <div class="form-container">
+                        <h4 class="section-title mb-3">Send us a message</h4>
+
+                        <div class="alert alert-success success-box" id="successMsg" role="alert">
+                            Thank you! you'll shortly reached out by our representative
+                        </div>
+
+                        <!-- FORM -->
+                        <form id="contactForm" onsubmit="validateform(event)" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="uname">Full Name</label>
+                                    <input type="text" class="form-control" id="uname" placeholder="Enter your name"
+                                        onkeyup="liveValidate()" autocomplete="name">
+                                    <div class="error" id="nameError"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone"
+                                        placeholder="Enter your contact no" onkeyup="liveValidate()" autocomplete="tel">
+                                    <div class="error" id="phoneError"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="mail">Email</label>
+                                    <input type="text" class="form-control" id="mail" placeholder="Email"
+                                        onkeyup="liveValidate()" autocomplete="email">
+                                    <div class="error" id="emailError"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="city">City</label>
+                                    <input type="text" class="form-control" id="city" placeholder="Enter your city"
+                                        onkeyup="liveValidate()" autocomplete="address-level2">
+                                    <div class="error" id="cityError"></div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label" for="subject">Subject</label>
+                                    <select class="form-select" id="subject" onchange="liveValidate()">
+                                        <option value="">Select Subject</option>
+                                        <option>General Inquiry</option>
+                                        <option>Complaint</option>
+                                        <option>Support</option>
+                                    </select>
+                                    <div class="error" id="subjectError"></div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label d-block">Gender:</label>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="radio" name="gender" value="Male" onchange="liveValidate()">
+                                            <span>Male</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="radio" name="gender" value="Female" onchange="liveValidate()">
+                                            <span>Female</span>
+                                        </label>
+                                    </div>
+                                    <div class="error" id="genderError"></div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label" for="message">Message</label>
+                                    <textarea class="form-control" id="message" placeholder="Write your message here..."
+                                        onkeyup="liveValidate()"></textarea>
+                                    <div class="error" id="messageError"></div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input type="checkbox" id="agree" onchange="liveValidate()">
+                                        <span>I agree to terms & conditions</span>
+                                    </div>
+                                    <div class="error" id="agreeError"></div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="submit-btn" type="submit">Submit</button>
+                                    <p class="small muted mt-2 mb-0">By submitting, you agree to be contacted by our
+                                        team regarding your request.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <!-- Column 1: Logo & Social -->
+                <div class="col-md-3 mb-4">
+                    <h5>32Smiles.com</h5>
+                    <p>Healthy Smiles Start Here</p>
+
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Site Map -->
+                <div class="col-md-3 mb-4">
+                    <h6>Site Map</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Patient Education</a></li>
+                        <li><a href="#">Professional Education</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="col-md-3 mb-4">
+                    <h6>Contact</h6>
+                    <p><a href="mailto:info@32smiles.com">info@32smiles.com</a></p>
+                    <p>+92-300-1234567</p>
+                </div>
+
+                <!-- Column 4: Address -->
+                <div class="col-md-3 mb-4">
+                    <h6>Address</h6>
+                    <p class="address-text">
+                        32 Smiles Dental Hub<br>
+                        Plot 45-C, Street 9,<br>
+                        Saba Commercial Area,<br>
+                        Phase V, DHA,<br>
+                        Karachi, Pakistan
+                    </p>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <p class="text-center copyright">
+                © 2026 32Smiles.com | Student Project
+            </p>
+        </div>
+    </footer>
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="cartModalLabel fw-bold"><i class="bi bi-bag-heart me-2"></i>Your
+                        Shopping Cart</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="cart-items-container">
+                        <div class="text-center py-5">
+                            <i class="bi bi-cart-x empty-cart-icon d-block mb-3"></i>
+                            <p class="text-muted">Your cart is currently empty.</p>
+                            <a href="product.html" class="btn btn-outline-primary btn-sm rounded-pill">Browse
+                                Products</a>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                        <span>Total:</span>
+                        <span class="text-primary" id="cart-total-amount">$0.00</span>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="product.html" class="btn btn-primary rounded-pill px-4">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const patterns = {
+            name: /^[A-Za-z][A-Za-z\s.'-]{1,49}$/,
+            phone: /^\+?[0-9\s()\-]{10,20}$/,
+            email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+            city: /^[A-Za-z][A-Za-z\s.'-]{1,49}$/,
+            message: /^[\s\S]{10,}$/
+        };
+
+        const el = (id) => document.getElementById(id);
+
+        function setState(inputEl, errorEl, ok, msg = "") {
+            if (!inputEl) return;
+
+            inputEl.classList.remove("is-valid", "is-invalid");
+            inputEl.classList.add(ok ? "is-valid" : "is-invalid");
+
+            if (errorEl) {
+                errorEl.textContent = ok ? "" : msg;
+            }
+        }
+
+        function validateName() {
+            const input = el("uname");
+            const ok = patterns.name.test((input.value || "").trim());
+            setState(input, el("nameError"), ok, "Please enter a valid name (letters only).");
+            return ok;
+        }
+
+        function validatePhone() {
+            const input = el("phone");
+            const ok = patterns.phone.test((input.value || "").trim());
+            setState(input, el("phoneError"), ok, "Please enter a valid phone number.");
+            return ok;
+        }
+
+        function validateEmail() {
+            const input = el("mail");
+            const ok = patterns.email.test((input.value || "").trim());
+            setState(input, el("emailError"), ok, "Please enter a valid email address.");
+            return ok;
+        }
+
+        function validateCity() {
+            const input = el("city");
+            const ok = patterns.city.test((input.value || "").trim());
+            setState(input, el("cityError"), ok, "Please enter a valid city (letters only).");
+            return ok;
+        }
+
+        function validateSubject() {
+            const input = el("subject");
+            const ok = (input.value || "").trim() !== "";
+            setState(input, el("subjectError"), ok, "Please select a subject.");
+            return ok;
+        }
+
+        function validateGender() {
+            const selected = document.querySelector('input[name="gender"]:checked');
+            const ok = !!selected;
+            el("genderError").textContent = ok ? "" : "Please select gender.";
+            return ok;
+        }
+
+        function validateMessage() {
+            const input = el("message");
+            const ok = patterns.message.test((input.value || "").trim());
+            setState(input, el("messageError"), ok, "Please write a message (min 10 characters).");
+            return ok;
+        }
+
+        function validateAgree() {
+            const input = el("agree");
+            const ok = input.checked === true;
+            el("agreeError").textContent = ok ? "" : "You must agree to terms & conditions.";
+            return ok;
+        }
+
+        function liveValidate() {
+            const success = el("successMsg");
+            success.style.display = "none";
+
+            validateName();
+            validatePhone();
+            validateEmail();
+            validateCity();
+            validateSubject();
+            validateGender();
+            validateMessage();
+            validateAgree();
+        }
+
+        function validateform(event) {
+            event.preventDefault();
+
+            const ok =
+                validateName() &
+                validatePhone() &
+                validateEmail() &
+                validateCity() &
+                validateSubject() &
+                validateGender() &
+                validateMessage() &
+                validateAgree();
+
+            if (ok) {
+                const success = el("successMsg");
+                success.style.display = "block";
+                success.scrollIntoView({ behavior: "smooth", block: "start" });
+
+
+                document.getElementById("contactForm").reset();
+
+
+                ["uname", "phone", "mail", "city", "subject", "message"].forEach((id) => {
+                    const input = el(id);
+                    if (input) input.classList.remove("is-valid", "is-invalid");
+                });
+
+
+                ["nameError", "phoneError", "emailError", "cityError", "subjectError", "genderError", "messageError", "agreeError"]
+                    .forEach((id) => {
+                        const e = el(id);
+                        if (e) e.textContent = "";
+                    });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            ["uname", "phone", "mail", "city", "message"].forEach((id) => {
+                const input = el(id);
+                if (input) input.addEventListener("blur", liveValidate);
+            });
+            const subject = el("subject");
+            if (subject) subject.addEventListener("change", liveValidate);
+
+            document.querySelectorAll('input[name="gender"]').forEach((r) => r.addEventListener("change", liveValidate));
+            const agree = el("agree");
+            if (agree) agree.addEventListener("change", liveValidate);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
